@@ -60,23 +60,25 @@
       function playSound(e) {
         const audio = document.querySelector(`audio[code="${event.code}"]`);
         const key = document.querySelector(`.key[code="${event.code}"]`);
-        if (!audio) return; // stop function from running all together
-        audio.currentTime = 0; // rewind to the start
-        audio.play();
-        key.classList.add('playing');
+        if (!audio) return; // stop function from running all together if there is no corresponding code
+        audio.currentTime = 0; // rewind to the start if clicked while still playing
+        audio.play(); // when playSound (event) is invoked, play the audio
+        key.classList.add('playing'); // add the playing classList when event is triggered (and thus function runs)
       }
 
       function removeTransition(e) {
-        if (e.propertyName !== 'transform') return; // skip if it's not transformed
-        this.classList.remove('playing');
+        if (e.propertyName !== 'transform') return; // stop function if transform is not active (has finished)
+        this.classList.remove('playing'); // when removeTransition is called (and transform is no longer active) remove .playing class
       }
 
-      const keys = document.querySelectorAll('.key');
-      keys.forEach((key) =>
-        key.addEventListener('transitionend', removeTransition)
+      const keys = document.querySelectorAll('.key'); // select the NodeList of all divs with the class .key
+      keys.forEach(
+        (
+          key // for every key in the NodeList
+        ) => key.addEventListener('transitionend', removeTransition) // when event transitionend is triggered, run removeTransition function declared above (removes .playing class)
       );
 
-      window.addEventListener('keydown', playSound);
+      window.addEventListener('keydown', playSound); // when key is pressed, invoke playSound function declared above (adds class and plays sound if key matches html code declaration)
     </script>
   </body>
 </html>
