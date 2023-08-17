@@ -77,6 +77,7 @@
 
       // Array.prototype.filter()
       // 1. Filter the list of inventors for those who were born in the 1500's
+
       const inventorsBorn = inventors.filter(
         (inventors) => inventors.year >= 1500 && inventors.year <= 1599
       );
@@ -97,7 +98,7 @@
       // 4. How many years did all the inventors live all together?
 
       const inventorsTotalLives = inventors.reduce(
-        (accumulator, current) => accumulator + (current.passed - current.year),
+        (total, inventor) => total + (inventor.passed - inventor.year),
         0
       );
 
@@ -117,6 +118,15 @@
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+      const boulevardLinks = Array.from(
+        document.querySelectorAll('.mw-category a')
+      ); // create a NodeList of all a elements inside the .mw-category class of the wiki list (webpage)
+      const boulevardsWithDe = boulevardLinks // apply the .map method to convert the a elements to their textContent values and use the .filter method to create a new array, that only includes boulevards with 'de' in them.
+        .map((link) => link.textContent)
+        .filter((name) => name.includes('de'));
+
+      console.log(boulevardsWithDe); // 12) ["Boulevard de l'Amiral-Bruix", 'Boulevard des Capucines', 'Boulevard de la Chapelle', 'Boulevard de Clichy', "Boulevard de l'Hôpital", 'Boulevard des Italiens', 'Boulevard de la Madeleine', 'Boulevard de Magenta', 'Boulevard Marguerite-de-Rochechouart', 'Boulevard de Sébastopol', 'Boulevard de Strasbourg', 'Boulevard de la Zone']
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
