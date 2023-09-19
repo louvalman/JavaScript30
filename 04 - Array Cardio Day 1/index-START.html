@@ -130,6 +130,13 @@
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
+      const peopleLastName = people
+        .map(function (person) {
+          // map each person in array to only the string before the comma, by creating a new array and returning only the first of the two parts of it [0]
+          let fullName = person.split(',');
+          return fullName[0];
+        })
+        .sort((a, b) => a.localeCompare(b)); // sort using localeCompare (string method)
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
