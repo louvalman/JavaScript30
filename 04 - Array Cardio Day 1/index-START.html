@@ -156,6 +156,17 @@
         'car',
         'truck',
       ];
+
+      const dataInstances = data.reduce(function (acc, vehicle) {
+        // could also leave out function and use an arrow after parameters, e.g. (acc, vehicle) => {}
+        if (!acc[vehicle]) {
+          // if the accumulator, e.g., car has not been through an iteration before, create it with the value 0, in the empty acc object - step is skipped if acc[vehicle] works
+          acc[vehicle] = 0;
+        }
+        acc[vehicle]++;
+        // increase the value of the acc obj e.g. car with 1, which means an key/value pair in the acc obj will always be at least 1 (incremented once)
+        return acc;
+      }, {});
     </script>
   </body>
 </html>
